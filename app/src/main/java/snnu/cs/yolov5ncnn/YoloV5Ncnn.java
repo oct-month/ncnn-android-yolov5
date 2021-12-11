@@ -12,7 +12,7 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 
-package com.tencent.yolov5ncnn;
+package snnu.cs.yolov5ncnn;
 
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
@@ -30,6 +30,8 @@ public class YoloV5Ncnn
         public String label;
         public float prob;
     }
+
+    public native boolean isGpuAvaliable();
 
     public native Obj[] Detect(Bitmap bitmap, boolean use_gpu);
 

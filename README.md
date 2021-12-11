@@ -19,5 +19,5 @@ extract ncnn-android-vulkan.zip into app/src/main/jni or change the ncnn_DIR pat
 open this project with Android Studio, build it and enjoy!
 
 ## screenshot
-![](screenshot.jpg)
+![效果](./screenshot.jpg)
 
