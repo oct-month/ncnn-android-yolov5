@@ -1,23 +1,27 @@
 # ncnn-android-yolov5
 
-The YOLOv5 object detection
-
-this is a sample ncnn android project, it depends on ncnn library only
+使用ncnn的拍照识别app
 
 https://github.com/Tencent/ncnn
 
-## how to build and run
+## 构建
 ### step1
-https://github.com/Tencent/ncnn/releases
 
-download ncnn-android-vulkan.zip or build ncnn for android yourself
+从 https://github.com/Tencent/ncnn/releases 下载 `ncnn-android-vulkan.zip`
+
+或者自行编译 https://github.com/Tencent/ncnn/wiki/how-to-build#build-for-android
 
 ### step2
-extract ncnn-android-vulkan.zip into app/src/main/jni or change the ncnn_DIR path to yours in app/src/main/jni/CMakeLists.txt
+
+将 `ncnn-android-vulkan.zip` 解压到 `app/src/main/jni` 目录下
+
+确保 `app/src/main/jni/CMakeLists.txt` 中的路径设置正确
 
 ### step3
-open this project with Android Studio, build it and enjoy!
 
-## screenshot
-![效果](./screenshot.jpg)
+用 `Android Studio` 打开此项目, 然后构建它。
+
+## 效果
+
+![效果](.img/screenshot2.jpg)
 
