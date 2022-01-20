@@ -26,6 +26,9 @@
 #include "net.h"
 #include "benchmark.h"
 
+static char model_name[] = "yolov5s.bin";
+static char param_name[] = "yolov5s.param";
+
 static ncnn::UnlockedPoolAllocator g_blob_pool_allocator;
 static ncnn::PoolAllocator g_workspace_pool_allocator;
 
@@ -326,7 +329,7 @@ JNIEXPORT jboolean JNICALL Java_snnu_cs_yolov5ncnn_YoloV5Ncnn_Init(JNIEnv* env, 
 
     // init param
     {
-        int ret = yolov5.load_param(mgr, "yolov5s.param");
+        int ret = yolov5.load_param(mgr, param_name);
         if (ret != 0)
         {
             __android_log_print(ANDROID_LOG_DEBUG, "YoloV5Ncnn", "load_param failed");
@@ -336,7 +339,7 @@ JNIEXPORT jboolean JNICALL Java_snnu_cs_yolov5ncnn_YoloV5Ncnn_Init(JNIEnv* env, 
 
     // init bin
     {
-        int ret = yolov5.load_model(mgr, "yolov5s.bin");
+        int ret = yolov5.load_model(mgr, model_name);
         if (ret != 0)
         {
             __android_log_print(ANDROID_LOG_DEBUG, "YoloV5Ncnn", "load_model failed");
@@ -457,7 +460,7 @@ JNIEXPORT jobjectArray JNICALL Java_snnu_cs_yolov5ncnn_YoloV5Ncnn_Detect(JNIEnv*
         // stride 16
         {
             ncnn::Mat out;
-            ex.extract("781", out);
+            ex.extract("353", out);
 
             ncnn::Mat anchors(6);
             anchors[0] = 30.f;
@@ -476,7 +479,7 @@ JNIEXPORT jobjectArray JNICALL Java_snnu_cs_yolov5ncnn_YoloV5Ncnn_Detect(JNIEnv*
         // stride 32
         {
             ncnn::Mat out;
-            ex.extract("801", out);
+            ex.extract("367", out);
 
             ncnn::Mat anchors(6);
             anchors[0] = 116.f;

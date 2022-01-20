@@ -3,12 +3,14 @@ plugins {
 }
 
 android {
-    compileSdk 30
+    compileSdkVersion 30
+    buildToolsVersion '30.0.2'
+    ndkVersion '23.1.7779620'
 
     defaultConfig {
         applicationId "snnu.cs.yolov5ncnn"
         minSdk 24
-        targetSdk 30
+        targetSdk 29
         versionCode 2
         versionName "1.0.2"
 
@@ -16,13 +18,13 @@ android {
 
         ndk {
             moduleName "ncnn"
-            abiFilters "armeabi-v7a", "arm64-v8a", "x86"
+            abiFilters "armeabi-v7a", "arm64-v8a"
         }
     }
 
     externalNativeBuild {
         cmake {
-            version "3.10.2"
+            version "3.18.1"
             path file('src/main/jni/CMakeLists.txt')
         }
     }
@@ -40,7 +42,6 @@ android {
     buildFeatures {
         viewBinding true
     }
-
 }
 
 dependencies {
@@ -50,6 +51,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.navigation:navigation-fragment:2.3.5'
     implementation 'androidx.navigation:navigation-ui:2.3.5'
+    implementation 'com.github.chrisbanes:PhotoView:2.3.0'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

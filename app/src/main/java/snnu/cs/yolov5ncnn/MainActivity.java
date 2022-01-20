@@ -33,10 +33,11 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+
+import com.github.chrisbanes.photoview.PhotoView;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -53,7 +54,7 @@ public class MainActivity extends Activity implements View.OnClickListener
     private static final int PHOTO_CROP = 4;
 
     private Uri imageUri = null;
-    private ImageView imageView = null;
+    private PhotoView imageView = null;
     private Bitmap bitmap = null;
     private Bitmap yourSelectedImage = null;
 
@@ -72,7 +73,7 @@ public class MainActivity extends Activity implements View.OnClickListener
             Log.e(TAG, "yolov5ncnn Init failed");
         }
 
-        imageView = (ImageView) findViewById(R.id.imageView);
+        imageView = findViewById(R.id.imageView);
 
         findViewById(R.id.buttonImage).setOnClickListener(this);
         findViewById(R.id.buttonCamera).setOnClickListener(this);
