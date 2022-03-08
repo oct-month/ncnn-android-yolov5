@@ -194,25 +194,27 @@ public class MainActivity extends Activity implements View.OnClickListener
 
         for (int i = 0; i < objects.length; i++)
         {
-            paint.setColor(colors[i % 19]);
-            canvas.drawRect(objects[i].x, objects[i].y, objects[i].x + objects[i].w, objects[i].y + objects[i].h, paint);
+            if (objects[i].h != 0) {
+                paint.setColor(colors[i % 19]);
+                canvas.drawRect(objects[i].x, objects[i].y, objects[i].x + objects[i].w, objects[i].y + objects[i].h, paint);
 
-            // draw filled text inside image
-            {
-                String text = objects[i].label + " = " + String.format("%.1f", objects[i].prob * 100) + "%";
+                // draw filled text inside image
+                {
+                    String text = objects[i].label + " = " + String.format("%.1f", objects[i].prob * 100) + "%";
 
-                float text_width = textpaint.measureText(text);
-                float text_height = - textpaint.ascent() + textpaint.descent();
+                    float text_width = textpaint.measureText(text);
+                    float text_height = -textpaint.ascent() + textpaint.descent();
 
-                float x = objects[i].x;
-                float y = objects[i].y - text_height;
-                if (y < 0)
-                    y = 0;
-                if (x + text_width > rgba.getWidth())
-                    x = rgba.getWidth() - text_width;
+                    float x = objects[i].x;
+                    float y = objects[i].y - text_height;
+                    if (y < 0)
+                        y = 0;
+                    if (x + text_width > rgba.getWidth())
+                        x = rgba.getWidth() - text_width;
 
-                canvas.drawRect(x, y, x + text_width, y + text_height, textbgpaint);
-                canvas.drawText(text, x, y - textpaint.ascent(), textpaint);
+                    canvas.drawRect(x, y, x + text_width, y + text_height, textbgpaint);
+                    canvas.drawText(text, x, y - textpaint.ascent(), textpaint);
+                }
             }
         }
         imageView.setImageBitmap(rgba);

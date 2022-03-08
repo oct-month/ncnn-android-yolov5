@@ -460,7 +460,7 @@ JNIEXPORT jobjectArray JNICALL Java_snnu_cs_yolov5ncnn_YoloV5Ncnn_Detect(JNIEnv*
         // stride 16
         {
             ncnn::Mat out;
-            ex.extract("353", out);
+            ex.extract("462", out);
 
             ncnn::Mat anchors(6);
             anchors[0] = 30.f;
@@ -479,7 +479,7 @@ JNIEXPORT jobjectArray JNICALL Java_snnu_cs_yolov5ncnn_YoloV5Ncnn_Detect(JNIEnv*
         // stride 32
         {
             ncnn::Mat out;
-            ex.extract("367", out);
+            ex.extract("482", out);
 
             ncnn::Mat anchors(6);
             anchors[0] = 116.f;
@@ -530,15 +530,25 @@ JNIEXPORT jobjectArray JNICALL Java_snnu_cs_yolov5ncnn_YoloV5Ncnn_Detect(JNIEnv*
 
     // objects to Obj[]
     static const char* class_names[] = {
-        "person", "bicycle", "car", "motorcycle", "airplane", "bus", "train", "truck", "boat", "traffic light",
-        "fire hydrant", "stop sign", "parking meter", "bench", "bird", "cat", "dog", "horse", "sheep", "cow",
-        "elephant", "bear", "zebra", "giraffe", "backpack", "umbrella", "handbag", "tie", "suitcase", "frisbee",
-        "skis", "snowboard", "sports ball", "kite", "baseball bat", "baseball glove", "skateboard", "surfboard",
-        "tennis racket", "bottle", "wine glass", "cup", "fork", "knife", "spoon", "bowl", "banana", "apple",
-        "sandwich", "orange", "broccoli", "carrot", "hot dog", "pizza", "donut", "cake", "chair", "couch",
-        "potted plant", "bed", "dining table", "toilet", "tv", "laptop", "mouse", "remote", "keyboard", "cell phone",
-        "microwave", "oven", "toaster", "sink", "refrigerator", "book", "clock", "vase", "scissors", "teddy bear",
-        "hair drier", "toothbrush"
+        "Papilio paris", "Papilio xuthus", "Papilio polytes", "Papilio bianor", "Papilio alcmenor",
+        "Papilio protenor", "Troides aeacus", "Graphium sarpedon", "Libythea celtis", "Satarupa monbeigi",
+        "Ampittia nana", "Caltoris bromus", "Parnara guttata", "pyrgus maculatus", "Pelopidas mathias",
+        "Parantica aglea", "Danaus genutia", "Lampides boeticus", "Catochrysops strabo", "Celastrina oreas",
+        "Albulina orbitula", "Chiladesp pandava", "Tongeia potanini", "Tongeia fischeri", "Lycaena phlaeas",
+        "Thecla betulae", "Polyommatus venus", "Favonius orientalis", "Everes argiades", "Lycaeides qinghaiensis Murayama",
+        "Paroeneis palaearctica", "Aphantopus hyperanthus", "Mycaiesis francisca", "Coenonympha amaryllis",
+        "Melanargia halimede", "Oeneis buddha", "Coenonympha semenovi", "Lethe marginalis", "Pontia daplidice",
+        "Baltia butleri", "Pieris davidis", "Aporia largeteaui", "Eurema hecabe", "Colias montium",
+        "Colias fieldii", "Leptidea amurensis", "Pontiacallidice", "Aporia procris", "Anthocharis cardamines",
+        "Aporia crataegi", "Pieris rapae", "Catopsilia scylla", "Colias heos", "Parnassius epaphus Oberthür",
+        "Parnassius szechenyii Frivaldszky", "Parnassius orleans", "Abisara echerius", "Neptis hylas",
+        "Nephargynnis anadyomene", "Brenthis ino", "Vanessa cardui", "Limenitis helmanni", "Argyreus hyperbius",
+        "Issoria eugenia", "Phaedyma columella", "Apatura ilia", "Fabriciana adippe", "Athyma perius",
+        "Clossiana gong", "Kaniska canace", "Polygonia c-album", "Pseudergolis wedah", "Calinaga buddha",
+        "Argynnis paphia", "Melitaea diamina", "Junonia almana", "Junonia orithya", "Argyronome laodice",
+        "Aglais urticae", "Athyma opalina", "Fabriciana nerippe", "Junonia iphita", "Speyeria aglaja",
+        "Childrena childreni", "Neptis pryeri", "Seokia pratti", "Neptis themis", "Polygonia c-aureum",
+        "Melitaea jezabel", "Euthalia phemius", "Suastus gremius", "Elymnias hypermnestra", "Euploea midamus", "Iambrix salsala"
     };
 
     jobjectArray jObjArray = env->NewObjectArray(objects.size(), objCls, NULL);
