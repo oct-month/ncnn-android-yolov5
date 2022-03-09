@@ -64,7 +64,7 @@ public class MainActivity extends Activity implements View.OnClickListener
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        setContentView(R.layout.activity_main);
 
         boolean ret_init = yolov5ncnn.Init(getAssets());
         if (!ret_init)
