@@ -3,11 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CameraFragment"
-    android:background="#000">
+    android:background="#000"
+    tools:context=".ImgFragment">
 
     <com.github.chrisbanes.photoview.PhotoView
-        android:id="@+id/PhotoView"
+        android:id="@+id/history_image_view"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_weight="1" />

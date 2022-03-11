@@ -4,14 +4,26 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../../layout/custom_preview.xml" value="0.534375" />
+        <entry key="../../../../../mnt/T2/work/ncnn-android-yolov5/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.4395" />
+        <entry key="../../../../../mnt/T2/work/ncnn-android-yolov5/app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.4395" />
+        <entry key="../../../../../mnt/T2/work/ncnn-android-yolov5/app/src/main/res/drawable/ic_baseline_history_24.xml" value="0.4395" />
+        <entry key="../../../../../mnt/T2/work/ncnn-android-yolov5/app/src/main/res/drawable/ic_baseline_photo_camera_24.xml" value="0.4395" />
+        <entry key="../../../../../mnt/T2/work/ncnn-android-yolov5/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.4395" />
+        <entry key="../../../../../mnt/T2/work/ncnn-android-yolov5/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.4395" />
+        <entry key="../../../../../mnt/T2/work/ncnn-android-yolov5/app/src/main/res/drawable/ic_launcher_background.xml" value="0.4395" />
+        <entry key="../../../../../mnt/T2/work/ncnn-android-yolov5/app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.4395" />
         <entry key="../../../../../mnt/T2/work/ncnn-android-yolov5/app/src/main/res/layout/activity_main.xml" value="0.1921487603305785" />
         <entry key="../../../../../mnt/T2/work/ncnn-android-yolov5/app/src/main/res/layout/content_main.xml" value="0.29375" />
-        <entry key="../../../../../mnt/T2/work/ncnn-android-yolov5/app/src/main/res/layout/fragment_about.xml" value="0.4746376811594203" />
+        <entry key="../../../../../mnt/T2/work/ncnn-android-yolov5/app/src/main/res/layout/fragment_about.xml" value="0.22407407407407406" />
         <entry key="../../../../../mnt/T2/work/ncnn-android-yolov5/app/src/main/res/layout/fragment_camera.xml" value="0.4746376811594203" />
         <entry key="../../../../../mnt/T2/work/ncnn-android-yolov5/app/src/main/res/layout/fragment_dashboard.xml" value="0.23581115017579107" />
         <entry key="../../../../../mnt/T2/work/ncnn-android-yolov5/app/src/main/res/layout/fragment_history.xml" value="0.4746376811594203" />
         <entry key="../../../../../mnt/T2/work/ncnn-android-yolov5/app/src/main/res/layout/fragment_home.xml" value="0.4890625" />
+        <entry key="../../../../../mnt/T2/work/ncnn-android-yolov5/app/src/main/res/layout/fragment_img.xml" value="0.4890625" />
+        <entry key="../../../../../mnt/T2/work/ncnn-android-yolov5/app/src/main/res/layout/image_row_item.xml" value="0.4890625" />
         <entry key="../../../../../mnt/T2/work/ncnn-android-yolov5/app/src/main/res/menu/menu_main.xml" value="0.4890625" />
+        <entry key="../../../../../mnt/T2/work/ncnn-android-yolov5/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.4935" />
+        <entry key="../../../../../mnt/T2/work/ncnn-android-yolov5/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.4395" />
       </map>
     </option>
   </component>

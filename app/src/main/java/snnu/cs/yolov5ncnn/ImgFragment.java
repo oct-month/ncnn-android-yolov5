@@ -15,19 +15,19 @@ import com.github.chrisbanes.photoview.PhotoView;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 
-public class CameraFragment extends Fragment
+public class ImgFragment extends Fragment
 {
     private static final String ARG_PARAM1 = "param1";
     private Bitmap mParam1 = null;
 
-    public CameraFragment()
+    public ImgFragment()
     {
         // Required empty public constructor
     }
 
-    public static CameraFragment newInstance(Bitmap bitmap)
+    public static ImgFragment newInstance(Bitmap bitmap)
     {
-        CameraFragment fragment = new CameraFragment();
+        ImgFragment fragment = new ImgFragment();
         if (bitmap != null) {
             Bundle args = new Bundle();
             ByteArrayOutputStream bs = new ByteArrayOutputStream();
@@ -53,9 +53,9 @@ public class CameraFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_camera, container, false);
+        View view = inflater.inflate(R.layout.fragment_img, container, false);
         if (mParam1 != null) {
-            PhotoView photoView = view.findViewById(R.id.PhotoView);
+            PhotoView photoView = view.findViewById(R.id.history_image_view);
             photoView.setImageBitmap(mParam1);
         }
         return view;
