@@ -5,16 +5,33 @@
 
     <androidx.cardview.widget.CardView
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/card_view"
+        android:id="@+id/history_card"
         android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         card_view:cardCornerRadius="4dp"
         android:onClick="historyItemClick">
-        <ImageView
-            android:id="@+id/history_img"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent"
+            android:layout_gravity="center">
+            <ImageView
+                android:id="@+id/history_img"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                />
+            <Button
+                android:id="@+id/history_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="#66000000"
+                android:text="删除"
+                android:textColor="@color/white"
+                android:visibility="gone"
+                />
+        </FrameLayout>
     </androidx.cardview.widget.CardView>
 
 </FrameLayout>
