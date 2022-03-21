@@ -1,6 +1,6 @@
 # ncnn-android-yolov5
 
-使用ncnn的拍照识别app
+使用ncnn的蝴蝶种类拍照识别app
 
 https://github.com/Tencent/ncnn
 
@@ -21,7 +21,7 @@ https://github.com/Tencent/ncnn
 
 用 `Android Studio` 打开此项目, 然后构建它。
 
-## 效果
+<!-- ## 效果
 
 ![效果](.img/screenshot2.jpg)
-
+ -->
