@@ -64,17 +64,23 @@ const app = express()
 app.use(express.static('public'))
 
 app.post('/api/image', (req, res, next) => {
-    upload.single('upload')(req, res, (err) => {
+    upload.single('file')(req, res, (err) => {
         if (err) {
             res.json({
                 err: err.message
             }, 400)
         }
         else {
-            var sum = crypto.createHash('sha256')
-            sum.update(req.file.buffer.toString('hex'))
-            var sha = sum.digest('hex')
-            var filename = sha + path.extname(req.file.originalname)
+            var filename = ""
+            if (req.body['name']) {
+                filename = req.body['name']
+            }
+            else {
+                var sum = crypto.createHash('sha256')
+                sum.update(req.file.buffer.toString('hex'))
+                var sha = sum.digest('hex')
+                filename = sha + path.extname(req.file.originalname)
+            }
             var filepath = path.join('public/uploads', filename)
             logger.debug(req.body)
             if (!fs.existsSync(filepath) || req.body['cover']) {
