@@ -60,14 +60,6 @@ const app = express()
 // 静态资源
 app.use(express.static('public'))
 
-// 跨域
-if (process.env.NODE_ENV !== 'product') {
-    app.use('/', (req, res, next) => {
-        res.header('Access-Control-Allow-Headers', 'Content-Type, x-requested-with')
-        res.header('Access-Control-Allow-Origin', `http://${config.host}:8080`)
-        next()
-    })
-}
 
 app.post('/api/image', (req, res, next) => {
     upload.single('upload')(req, res, (err) => {
