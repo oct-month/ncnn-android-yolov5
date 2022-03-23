@@ -21,6 +21,15 @@ https://github.com/Tencent/ncnn
 
 用 `Android Studio` 打开此项目, 然后构建它。
 
+### step4
+
+后端图床部署，使用`docker`
+
+```shell
+cd ncnn-image
+sh build-run.sh
+```
+
 <!-- ## 效果
 
 ![效果](.img/screenshot2.jpg)
