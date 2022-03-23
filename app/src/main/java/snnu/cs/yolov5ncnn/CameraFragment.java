@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 
 import com.github.chrisbanes.photoview.PhotoView;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 
 public class CameraFragment extends Fragment

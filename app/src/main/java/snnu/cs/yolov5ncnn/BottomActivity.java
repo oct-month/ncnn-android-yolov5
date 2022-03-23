@@ -180,6 +180,7 @@ public class BottomActivity extends AppCompatActivity
         File file = null;
         try {
             file = File.createTempFile("" + System.currentTimeMillis(), ".jpg", getCacheDir());
+            String s = "";
         }
         catch (IOException e) {
             e.printStackTrace();
