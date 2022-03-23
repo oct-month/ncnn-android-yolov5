@@ -299,6 +299,13 @@ public class HistoryFragment extends Fragment
         }
         catch (IOException e) {
             e.printStackTrace();
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    pDialog.cancel();
+                    Toast.makeText(getContext(), "同步失败，网络错误！", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 }
