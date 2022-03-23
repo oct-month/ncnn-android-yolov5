@@ -4,9 +4,12 @@ const express = require('express')
 const multer = require('multer')
 const crypto = require('crypto')
 const path = require('path')
+// const http = require('http')
+const https = require('https')
 
 const logger = require('./logger')
 const config = require('./config')
+
 
 // var denv = dotenv.config({
 //     path: './.env',
@@ -60,7 +63,6 @@ const app = express()
 // 静态资源
 app.use(express.static('public'))
 
-
 app.post('/api/image', (req, res, next) => {
     upload.single('upload')(req, res, (err) => {
         if (err) {
@@ -104,7 +106,16 @@ app.get('/api/image', (req, res, next) => {
     })
 })
 
+// httpServer = http.createServer(app)
+httpsServer = https.createServer({
+    key: fs.readFileSync('./ssl/nginx.key', 'utf-8'),
+    cert: fs.readFileSync('./ssl/nginx.crt')
+}, app)
 
-app.listen(config.serverPort, () => {
-    logger.debug(`Server start on http://127.0.0.1:${config.serverPort}`)
+httpsServer.listen(config.serverPort, () => {
+    logger.debug(`Server start on https://127.0.0.1:${config.serverPort}`)
 })
+
+// app.listen(config.serverPort, () => {
+//     logger.debug(`Server start on http://127.0.0.1:${config.serverPort}`)
+// })
