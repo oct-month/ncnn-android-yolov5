@@ -177,15 +177,7 @@ public class BottomActivity extends AppCompatActivity
 
     public void saveBitmap(Bitmap bitmap)
     {
-        File file = null;
-        try {
-            file = File.createTempFile("" + System.currentTimeMillis(), ".jpg", getCacheDir());
-            String s = "";
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-            return;
-        }
+        File file = new File(getCacheDir(), System.currentTimeMillis() + ".jpg");
         try {
             FileOutputStream out = new FileOutputStream(file);
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);

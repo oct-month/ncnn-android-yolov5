@@ -104,6 +104,12 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.View
         return localDataSets.size();
     }
 
+    public void updateDatasets(String[] dataSet)
+    {
+        localDataSets = new LinkedList<>(Arrays.asList(dataSet));
+        notifyDataSetChanged();
+    }
+
     public void clearAllImg()
     {
         String[] filenames = localDataSets.toArray(new String[0]);

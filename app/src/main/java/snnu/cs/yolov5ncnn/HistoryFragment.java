@@ -1,6 +1,7 @@
 package snnu.cs.yolov5ncnn;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
@@ -17,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
@@ -29,6 +31,8 @@ import java.io.IOException;
 import java.security.SecureRandom;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.net.ssl.HostnameVerifier;
@@ -48,6 +52,8 @@ import okhttp3.Response;
 public class HistoryFragment extends Fragment
 {
     private static final String TAG = HistoryFragment.class.getSimpleName();
+    private ImageListAdapter imageListAdapter;
+    private ProgressDialog pDialog;
 
     public HistoryFragment()
     {
@@ -71,16 +77,22 @@ public class HistoryFragment extends Fragment
     {
         View view = inflater.inflate(R.layout.fragment_history, container, false);
 
-
         RecyclerView imageListView = view.findViewById(R.id.image_list_view);
         LinearLayoutManager layoutManager = new GridLayoutManager(view.getContext(), 2, GridLayoutManager.VERTICAL, false);
         imageListView.setLayoutManager(layoutManager);
         // layoutManager.setOrientation(RecyclerView.VERTICAL);
-        ImageListAdapter imageListAdapter = new ImageListAdapter(getLocalImageList());
+        imageListAdapter = new ImageListAdapter(getLocalImageList());
         imageListView.setAdapter(imageListAdapter);
         imageListView.addItemDecoration(new DividerItemDecoration(view.getContext(), RecyclerView.HORIZONTAL));
         imageListView.addItemDecoration(new DividerItemDecoration(view.getContext(), RecyclerView.VERTICAL));
         imageListView.setItemAnimator(new DefaultItemAnimator());
+
+        pDialog = new ProgressDialog(getActivity());
+        pDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        pDialog.setTitle("图片同步中...");
+        pDialog.setIcon(R.drawable.ic_baseline_sync_24);
+        pDialog.setIndeterminate(false);
+        pDialog.setCancelable(false);
 
         Toolbar toolbar = view.findViewById(R.id.history_toolbar);
         toolbar.inflateMenu(R.menu.history_menu);
@@ -114,13 +126,14 @@ public class HistoryFragment extends Fragment
         FilenameFilter imgFilter = new FilenameFilter() {
             @Override
             public boolean accept(File dir, String name) {
-                if (name.endsWith(".jpg")) {
+                if (name.endsWith(".jpg") || name.endsWith(".jpeg") || name.endsWith(".png")) {
                     return true;
                 }
                 return false;
             }
         };
-        return getContext().getCacheDir().list(imgFilter);
+        String[] imgList =getContext().getCacheDir().list(imgFilter);
+        return imgList;
     }
 
     private void clearImageLocal(ImageListAdapter imageListAdapter)
@@ -182,10 +195,7 @@ public class HistoryFragment extends Fragment
     private void saveByteImage(String name, byte[] bytes)
     {
         try {
-            String[] split = name.split("\\.");
-            String ext = "." + split[split.length - 1];
-            name = name.substring(0, name.length() - ext.length());
-            File file = File.createTempFile(name, ext, getContext().getCacheDir());
+            File file = new File(getContext().getCacheDir(), name);
             FileOutputStream fos = new FileOutputStream(file);
             fos.write(bytes);
             fos.flush();
@@ -198,17 +208,22 @@ public class HistoryFragment extends Fragment
 
     private void refresh()
     {
-        // TODO 同步后的刷新问题
-        Fragment currentFragment = getActivity().getSupportFragmentManager().findFragmentById(R.id.nav_fragment);
-        final FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-        ft.detach(currentFragment);
-        ft.attach(currentFragment);
-        ft.commit();
+        String[] datasets = getLocalImageList();
+        imageListAdapter.updateDatasets(datasets);
     }
 
     // 同步服务器上的图片
     private void syncImageList()
     {
+        int progress = 0;
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                pDialog.setIndeterminate(true);
+                pDialog.show();
+            }
+        });
+
         final String url = "https://www.ablocker.top:8082/api/image";
         final String imgUrl = "https://www.ablocker.top:8082/uploads/";
         final OkHttpClient client = getUnsafeOkhttpClient();
@@ -223,6 +238,11 @@ public class HistoryFragment extends Fragment
             }
             List<String> imgList =  new Gson().fromJson(response.body().string(), ImageListResponse.class).getImglist();
             String[] localList = getLocalImageList();
+
+            pDialog.setMax(imgList.size() + localList.length);
+            pDialog.setIndeterminate(false);
+            pDialog.setProgress(progress);
+
             // 云端有的下载
             for (String p : imgList) {
                 boolean flag = true;
@@ -242,6 +262,7 @@ public class HistoryFragment extends Fragment
                         saveByteImage(p, bytes);
                     }
                 }
+                pDialog.setProgress(++progress);
             };
             // 云端没有的上传
             for (String s : localList) {
@@ -265,11 +286,13 @@ public class HistoryFragment extends Fragment
                             .build();
                     client.newCall(request).execute();
                 }
+                pDialog.setProgress(++progress);
             }
-            refresh();
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
+                    pDialog.cancel();
+                    refresh();
                     Toast.makeText(getContext(), "图片同步成功", Toast.LENGTH_SHORT).show();
                 }
             });
