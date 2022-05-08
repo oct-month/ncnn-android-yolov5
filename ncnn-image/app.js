@@ -63,6 +63,7 @@ const app = express()
 // 静态资源
 app.use(express.static('public'))
 
+
 app.post('/api/image', (req, res, next) => {
     upload.single('file')(req, res, (err) => {
         if (err) {
@@ -97,7 +98,7 @@ app.post('/api/image', (req, res, next) => {
     })
 })
 
-app.get('/api/image', (req, res, next) => {
+function getImgList() {
     var re = /(\.jpg|\.png|\.jpeg)$/i
     var imgList = fs.readdirSync('./public/uploads').filter((val) => {
         if (val.match(re)) {
@@ -107,8 +108,12 @@ app.get('/api/image', (req, res, next) => {
             return false
         }
     })
+    return imgList
+}
+
+app.get('/api/image', (req, res, next) => {
     res.json({
-        imglist: imgList
+        imglist: getImgList()
     })
 })
 

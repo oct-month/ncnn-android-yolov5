@@ -1,0 +1,3 @@
+{{each imglist}}
+    <img src="/uploads/{{$value}}"/>
+{{/each}}
