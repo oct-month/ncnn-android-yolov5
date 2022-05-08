@@ -100,14 +100,14 @@ public class HistoryFragment extends Fragment
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
-                    case R.id.history_sync_btn:
-                        new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                syncImageList();
-                            }
-                        }).start();
-                        break;
+                    // case R.id.history_sync_btn:
+                    //     new Thread(new Runnable() {
+                    //         @Override
+                    //         public void run() {
+                    //             syncImageList();
+                    //         }
+                    //     }).start();
+                    //     break;
                     case R.id.history_clear_btn:
                         clearImageLocal(imageListAdapter);
                         break;
@@ -115,7 +115,7 @@ public class HistoryFragment extends Fragment
                 return true;
             }
         });
-        toolbar.getMenu().findItem(R.id.history_sync_btn).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        // toolbar.getMenu().findItem(R.id.history_sync_btn).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
         toolbar.getMenu().findItem(R.id.history_clear_btn).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 
         return view;
@@ -154,44 +154,6 @@ public class HistoryFragment extends Fragment
         dialog.show();
     }
 
-    private OkHttpClient getUnsafeOkhttpClient()
-    {
-        try {
-            final X509TrustManager manager = new X509TrustManager() {
-                @Override
-                public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
-                }
-
-                @Override
-                public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
-                }
-
-                @Override
-                public X509Certificate[] getAcceptedIssuers() {
-                    return new X509Certificate[0];
-                }
-            };
-            final TrustManager[] trustAllCerts = new TrustManager[] {
-                    manager
-            };
-            final SSLContext sslContext = SSLContext.getInstance("SSL");
-            sslContext.init(null, trustAllCerts, new SecureRandom());
-            final SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
-            return new OkHttpClient.Builder()
-                    .sslSocketFactory(sslSocketFactory, manager)
-                    .hostnameVerifier(new HostnameVerifier() {
-                        @Override
-                        public boolean verify(String hostname, SSLSession session) {
-                            return true;
-                        }
-                    })
-                    .build();
-        }
-        catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     private void saveByteImage(String name, byte[] bytes)
     {
         try {
@@ -226,7 +188,7 @@ public class HistoryFragment extends Fragment
 
         final String url = "https://www.ablocker.top:8082/api/image";
         final String imgUrl = "https://www.ablocker.top:8082/uploads/";
-        final OkHttpClient client = getUnsafeOkhttpClient();
+        final OkHttpClient client = Utils.getUnsafeOkhttpClient();
         Request request = new Request.Builder()
                 .url(url)
                 .build();
